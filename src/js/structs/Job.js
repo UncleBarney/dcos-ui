@@ -14,6 +14,14 @@ module.exports = class Job extends Item {
     return this.get('description');
   }
 
+  getCommand() {
+    return this.get('run').cmd;
+  }
+
+  getDescription() {
+    return this.get('description');
+  }
+
   getId() {
     return this.get('id');
   }
