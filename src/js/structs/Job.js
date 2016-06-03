@@ -27,6 +27,14 @@ module.exports = class Job extends Item {
     return this.get('id');
   }
 
+  getLongestRunningActiveRun() {
+    let sortedRuns = this.getActiveRuns().getItems().sort(function (a, b) {
+      return a.getDateCreated().valueOf() -  b.getDateCreated().valueOf();
+    })
+
+    return sortedRuns[0];
+  }
+
   getName() {
     return this.getId().split('/').pop();
   }
