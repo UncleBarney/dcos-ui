@@ -1,6 +1,18 @@
 import Item from './Item';
 
 module.exports = class Job extends Item {
+  getActiveRuns() {
+    return new JobActiveRunList({items: this.get('activeRuns')});
+  }
+
+  getCommand() {
+    return this.get('run').cmd;
+  }
+
+  getDescription() {
+    return this.get('description');
+  }
+
   getId() {
     return this.get('id');
   }
