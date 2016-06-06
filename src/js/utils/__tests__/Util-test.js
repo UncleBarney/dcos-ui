@@ -1,7 +1,5 @@
 jest.dontMock('../Util');
 
-var deepEqual = require('deep-equal');
-
 var Util = require('../Util');
 
 describe('Util', function () {
@@ -355,8 +353,7 @@ describe('Util', function () {
       };
       expectedObject.array[0] = 'test';
 
-      expect(deepEqual(Util.deepCopy(originalObject), expectedObject))
-        .toEqual(true);
+      expect(Util.deepCopy(originalObject)).toEqual(expectedObject);
     });
 
     it('does clone an array with unusual small indices', function () {
@@ -370,8 +367,9 @@ describe('Util', function () {
       };
       expectedObject.array[2] = 'test';
 
-      expect(deepEqual(Util.deepCopy(originalObject), expectedObject))
-        .toEqual(true);
+      expect(Util.deepCopy(originalObject)).toEqual(expectedObject);
     });
+
   });
+
 });
