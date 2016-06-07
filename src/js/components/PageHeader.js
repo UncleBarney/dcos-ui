@@ -78,7 +78,7 @@ class PageHeader extends React.Component {
     } = this.props;
 
     let classes = classNames(
-      'container container-fluid container-pod container-pod-short',
+      'container container-fluid container-pod container-pod-short flex-no-shrink',
       'flush flush-top',
       className
     );

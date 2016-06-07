@@ -75,7 +75,7 @@ class ServicesBreadcrumb extends React.Component {
     }
 
     return (
-      <div className="flex-box control-group">
+      <div className="flex-box flex-no-shrink control-group">
         <h4 className="breadcrumbs flush-top inverse">
           {breadcrumbNodes}
         </h4>
