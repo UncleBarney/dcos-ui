@@ -169,7 +169,7 @@ if (Config.useFixtures) {
     deleteJob: {
       event: 'success', success: {response: {}}
     },
-    rubJob: {
+    runJob: {
       event: 'success', success: {response: {}}
     },
     suspendJob: {
