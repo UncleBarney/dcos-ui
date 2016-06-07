@@ -77,18 +77,22 @@ class PageHeader extends React.Component {
       navigationTabs
     } = this.props;
 
+    let dividerClasses = dividerClassName;
+
+    if (navigationTabs) {
+      dividerClasses = classNames(
+        'container-pod container-pod-short flush-top',
+        'container-pod-divider-bottom container-pod-divider-bottom-align-right',
+        'container-pod-divider-inverse',
+        {'flush-bottom': !!navigationTabs},
+        dividerClassName
+      );
+    }
+
     let classes = classNames(
       'container container-fluid container-pod container-pod-short',
       'flush flush-top',
       className
-    );
-
-    let dividerClasses = classNames(
-      'container-pod container-pod-short flush-top',
-      'container-pod-divider-bottom container-pod-divider-bottom-align-right',
-      'container-pod-divider-inverse',
-      {'flush-bottom': !!navigationTabs},
-      dividerClassName
     );
 
     let mediaWrapperClasses = classNames(
