@@ -17,7 +17,6 @@ var ServiceList = require('../components/ServiceList');
 import StringUtil from '../utils/StringUtil';
 var TasksChart = require('../components/charts/TasksChart');
 var SidebarActions = require('../events/SidebarActions');
-import SidePanels from '../components/SidePanels';
 import UnitHealthStore from '../stores/UnitHealthStore';
 
 function getMesosState() {
@@ -97,18 +96,6 @@ var DashboardPage = React.createClass({
       EventTypes.MARATHON_APPS_CHANGE,
       this.onMarathonStateChange
     );
-
-    this.internalStorage_update({
-      openServicePanel: this.props.params.serviceName != null,
-      openTaskPanel: this.props.params.taskID != null
-    });
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    this.internalStorage_update({
-      openServicePanel: nextProps.params.serviceName != null,
-      openTaskPanel: nextProps.params.taskID != null
-    });
   },
 
   componentWillUnmount: function () {
@@ -296,9 +283,6 @@ var DashboardPage = React.createClass({
             </Panel>
           </div>
         </div>
-        <SidePanels
-          params={this.props.params}
-          openedPage="dashboard" />
       </Page>
     );
   }

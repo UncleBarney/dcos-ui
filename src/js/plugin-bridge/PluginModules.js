@@ -65,7 +65,6 @@ module.exports = {
     Page: 'Page',
     PageHeader: 'PageHeader',
     RequestErrorMsg: 'RequestErrorMsg',
-    SidePanelContents: 'SidePanelContents',
     ToggleButton: 'ToggleButton'
   },
   config: {
