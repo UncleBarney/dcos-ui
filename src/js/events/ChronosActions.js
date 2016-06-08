@@ -87,10 +87,10 @@ const ChronosActions = {
     });
   },
 
-  deleteJob: function (jobID) {
+  deleteJob: function (jobID, stopCurrentJobRuns = false) {
     RequestUtil.json({
-      url: `${Config.rootUrl}/chronos/jobs/${jobID}`,
-      data: {stopCurrentJobRuns: true},
+      url: `${Config.rootUrl}/chronos/jobs/${jobID}` +
+        `?stopCurrentJobRuns=${stopCurrentJobRuns}`,
       method: 'DELETE',
       success: function () {
         AppDispatcher.handleServerAction({
@@ -129,9 +129,9 @@ const ChronosActions = {
     });
   },
 
-  suspendJob: function (jobID, data) {
+  suspendSchedule: function (jobID, data) {
     RequestUtil.json({
-      url: `${Config.rootUrl}/chronos/jobs/${jobID}`,
+      url: `${Config.rootUrl}/chronos/jobs/${jobID}/schedules/${data.id}`,
       method: 'PUT',
       data,
       success: function () {
@@ -173,7 +173,7 @@ if (Config.useFixtures) {
     runJob: {
       event: 'success', success: {response: {}}
     },
-    suspendJob: {
+    suspendSchedule: {
       event: 'success', success: {response: {}}
     }
   };
