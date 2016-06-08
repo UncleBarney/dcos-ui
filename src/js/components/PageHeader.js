@@ -71,6 +71,7 @@ class PageHeader extends React.Component {
 
   render() {
     let {
+      children,
       className,
       dividerClassName,
       mediaWrapperClassName,
@@ -114,6 +115,7 @@ class PageHeader extends React.Component {
               </div>
             </div>
           </div>
+          {children}
           {navigationTabs}
         </div>
       </div>
