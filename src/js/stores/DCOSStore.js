@@ -159,6 +159,7 @@ class DCOSStore extends EventEmitter {
   }
 
   onChronosChange() {
+    this.data.chronos = ChronosStore.jobTree;
     this.emit(DCOS_CHANGE);
   }
 
@@ -219,7 +220,7 @@ class DCOSStore extends EventEmitter {
    * @type {JobTree}
    */
   get jobTree() {
-    return ChronosStore.jobTree;
+    return this.data.chronos;
   }
 
   /**
@@ -256,12 +257,6 @@ class DCOSStore extends EventEmitter {
       );
     });
 
-  }
-
-  get jobTree() {
-    let {chronos} = this.data;
-
-    return chronos;
   }
 
   get dataProcessed() {
