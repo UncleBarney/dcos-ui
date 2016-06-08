@@ -214,6 +214,7 @@ class NodeDetailPage extends mixin(InternalStorageMixin, TabsMixin, StoreMixin) 
     let node = this.internalStorage_get().node;
     let {params} = this.props;
 
+    // TODO (DCOS-7580): Clean up NodeDetailPage routed and unrouted views
     if (!node) {
       return (
         <Page title="Nodes">
@@ -223,8 +224,13 @@ class NodeDetailPage extends mixin(InternalStorageMixin, TabsMixin, StoreMixin) 
     }
 
     if (params.taskID) {
+      // Make sure to grow when logs are displayed
+      let routes = this.context.router.getCurrentRoutes();
+
       return (
-        <Page title="Nodes">
+        <Page
+          dontScroll={routes[routes.length - 1].dontScroll}
+          title="Nodes">
           <RouteHandler />
         </Page>
       );

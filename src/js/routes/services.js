@@ -50,6 +50,7 @@ let serviceRoutes = {
                 {
                   type: Route,
                   name: 'services-task-details-logs',
+                  dontScroll: true,
                   path: 'logs/?',
                   handler: TaskLogsTab
                 }
