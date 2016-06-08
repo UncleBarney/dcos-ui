@@ -256,6 +256,7 @@ var NodesPage = React.createClass({
           currentLength={nodesList.length}
           totalLength={data.totalNodes} />
         <FilterBar rightAlignLastNChildren={1}>
+          {this.getFilterInputText()}
           <FilterButtons
             renderButtonContent={this.getButtonContent}
             filters={HEALTH_FILTER_BUTTONS}
@@ -271,7 +272,6 @@ var NodesPage = React.createClass({
               totalHostsCount={data.totalNodes}
               handleFilterChange={this.handleByServiceFilterChange} />
           </div>
-          {this.getFilterInputText()}
           {this.getViewTypeRadioButtons(this.resetFilter)}
         </FilterBar>
         <RouteHandler
