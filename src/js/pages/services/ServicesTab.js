@@ -168,7 +168,6 @@ var ServicesTab = React.createClass({
     // Render empty panel
     return (
       <div>
-        <ServicesBreadcrumb serviceTreeItem={item} />
         <AlertPanel
           title="No Services Deployed"
           footer={this.getAlertPanelFooter()}
