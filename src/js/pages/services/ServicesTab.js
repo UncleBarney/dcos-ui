@@ -149,9 +149,9 @@ var ServicesTab = React.createClass({
       );
     }
 
-    if (this.props.params.taskID) {
+    if (this.props.params.taskID || this.props.params.volumeID) {
       return (
-        <RouteHandler />
+        <RouteHandler service={item} />
       );
     }
 

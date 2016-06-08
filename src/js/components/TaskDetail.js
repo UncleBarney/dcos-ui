@@ -2,6 +2,7 @@ import mixin from 'reactjs-mixin';
 /* eslint-disable no-unused-vars */
 import React from 'react';
 /* eslint-enable no-unused-vars */
+import {RouteHandler} from 'react-router';
 import {StoreMixin} from 'mesosphere-shared-reactjs';
 
 import DescriptionList from './DescriptionList';
@@ -13,6 +14,7 @@ import PageHeader from './PageHeader';
 import RequestErrorMsg from './RequestErrorMsg';
 import ResourcesUtil from '../utils/ResourcesUtil';
 import ServicesBreadcrumb from './ServicesBreadcrumb';
+import ServiceVolumeTable from './ServiceVolumeTable';
 import TaskDebugView from './TaskDebugView';
 import TaskDirectoryView from './TaskDirectoryView';
 import TaskDirectoryStore from '../stores/TaskDirectoryStore';
@@ -62,6 +64,11 @@ class TaskDetail extends mixin(InternalStorageMixin, TabsMixin, StoreMixin) {
   componentDidMount() {
     super.componentDidMount(...arguments);
     this.store_removeEventListenerForStoreID('summary', 'success');
+    this.checkForVolumes();
+  }
+
+  componentWillUpdate() {
+    this.checkForVolumes();
   }
 
   onStateStoreSuccess() {
@@ -80,6 +87,21 @@ class TaskDetail extends mixin(InternalStorageMixin, TabsMixin, StoreMixin) {
       directory: TaskDirectoryStore.get('directory'),
       taskDirectoryErrorCount: 0
     });
+  }
+
+  checkForVolumes() {
+    // Add the Volumes tab if it isn't already there and the service has
+    // at least one volume.
+    if (this.tabs_tabs.volumes == null) {
+      let service = MarathonStore.getServiceFromTaskID(
+        this.props.params.taskID
+      );
+
+      if (service.getVolumes().getItems().length > 0) {
+        this.tabs_tabs.volumes = 'Volumes';
+        this.forceUpdate();
+      }
+    }
   }
 
   hasLoadingError() {
@@ -335,7 +357,26 @@ class TaskDetail extends mixin(InternalStorageMixin, TabsMixin, StoreMixin) {
     return (<ServicesBreadcrumb serviceTreeItem={service} taskID={taskID} />);
   }
 
+  renderVolumesTabView() {
+    let volumes = MarathonStore.getServiceFromTaskID(this.props.params.taskID)
+      .getVolumes().getItems();
+
+    return (
+      <ServiceVolumeTable
+        params={{id: this.props.params.id, taskID: this.props.params.taskID}}
+        volumes={volumes} />
+    );
+  }
+
   render() {
+    if (this.props.params.volumeID) {
+      let service = MarathonStore.getServiceFromTaskID(
+        this.props.params.taskID
+      );
+
+      return <RouteHandler service={service} />;
+    }
+
     if (MesosStateStore.get('lastMesosState').slaves == null) {
       return null;
     }

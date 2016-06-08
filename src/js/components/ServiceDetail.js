@@ -8,8 +8,8 @@ import ServiceDetailConfigurationTab from './ServiceDetailConfigurationTab';
 import ServiceDetailTaskTab from './ServiceDetailTaskTab';
 import ServiceDetailVolumesTab from './ServiceDetailVolumesTab';
 import ServiceFormModal from './modals/ServiceFormModal';
-import ServiceDetailVolumesTab from './ServiceDetailVolumesTab';
 import ServiceInfo from './ServiceInfo';
+import ServiceVolumeTable from './ServiceVolumeTable';
 import ServicesBreadcrumb from './ServicesBreadcrumb';
 import TabsMixin from '../mixins/TabsMixin';
 
@@ -26,8 +26,7 @@ class ServiceDetail extends mixin(InternalStorageMixin, TabsMixin) {
     this.tabs_tabs = {
       tasks: 'Tasks',
       configuration: 'Configuration',
-      debug: 'Debug',
-      volumes: 'Volumes'
+      debug: 'Debug'
     };
 
     this.state = {
@@ -40,6 +39,15 @@ class ServiceDetail extends mixin(InternalStorageMixin, TabsMixin) {
     });
   }
 
+  componentDidMount() {
+    super.componentDidMount(...arguments);
+    this.checkForVolumes();
+  }
+
+  componentWillUpdate() {
+    this.checkForVolumes();
+  }
+
   onActionsItemSelection(item) {
     if (item.id === ServiceActionItem.EDIT) {
       this.setState({isServiceFormModalShown: true});
@@ -48,6 +56,16 @@ class ServiceDetail extends mixin(InternalStorageMixin, TabsMixin) {
 
   onCloseServiceFormModal() {
     this.setState({isServiceFormModalShown: false});
+  }
+
+  checkForVolumes() {
+    // Add the Volumes tab if it isn't already there and the service has
+    // at least one volume.
+    if (this.tabs_tabs.volumes == null
+      && this.props.service.getVolumes().getItems().length > 0) {
+      this.tabs_tabs.volumes = 'Volumes';
+      this.forceUpdate();
+    }
   }
 
   renderConfigurationTabView() {
@@ -62,7 +80,9 @@ class ServiceDetail extends mixin(InternalStorageMixin, TabsMixin) {
 
   renderVolumesTabView() {
     return (
-      <ServiceDetailVolumesTab service={this.props.service}/>
+      <ServiceVolumeTable
+        params={this.context.router.getCurrentParams()}
+        volumes={this.props.service.getVolumes().getItems()} />
     );
   }
 
