@@ -141,7 +141,7 @@ class JobRunHistoryTable extends React.Component {
     let activeRuns = job.getActiveRuns();
 
     return activeRuns.getItems().map((activeRun, runIndex) => {
-      let longestRunningTask = activeRun.getLongestRunningTask();
+      let longestRunningTask = activeRun.getTasks().getLongestRunningTask();
       let dateRunStarted = activeRun.getDateCreated();
       let dateRunFinished = longestRunningTask.getDateCompleted();
 
