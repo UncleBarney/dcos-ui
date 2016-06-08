@@ -96,8 +96,7 @@ class PageHeader extends React.Component {
     );
 
     let mediaWrapperClasses = classNames(
-      'media-object-spacing-wrapper media-object-spacing-narrow',
-      'media-object-offset',
+      'media-object-spacing-wrapper',
       mediaWrapperClassName
     );
 
