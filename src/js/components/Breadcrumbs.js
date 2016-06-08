@@ -115,6 +115,10 @@ class Breadcrumbs extends React.Component {
 
   getLastItemWidth() {
     let lastItem = ReactDOM.findDOMNode(this).lastChild;
+
+    if (!lastItem || !lastItem.firstChild) {
+      return LAST_ITEM_OFFSET;
+    }
     let lastItemLink = lastItem.firstChild;
 
     return lastItemLink.scrollWidth + LAST_ITEM_OFFSET;
