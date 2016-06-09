@@ -1,12 +1,13 @@
 jest.dontMock('../SidePanelContents');
 jest.dontMock('../TaskDirectoryView');
 jest.dontMock('../TaskDetail');
+jest.dontMock('../../stores/MarathonStore');
 jest.dontMock('../../stores/MesosStateStore');
 jest.dontMock('../../mixins/GetSetMixin');
 
 var JestUtil = require('../../utils/JestUtil');
 
-JestUtil.unMockStores(['MesosStateStore', 'TaskDirectoryStore', 'MesosSummaryStore']);
+JestUtil.unMockStores(['MesosStateStore', 'TaskDirectoryStore', 'MarathonStore', 'MesosSummaryStore']);
 require('../../utils/StoreMixinConfig');
 /* eslint-disable no-unused-vars */
 var React = require('react');
@@ -14,7 +15,9 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 
+var MarathonStore = require('../../stores/MarathonStore');
 var MesosStateStore = require('../../stores/MesosStateStore');
+var Service = require('../../structs/Service');
 import Task from '../../structs/Task';
 var TaskDirectory = require('../../structs/TaskDirectory');
 var TaskDirectoryStore = require('../../stores/TaskDirectoryStore');
@@ -22,6 +25,10 @@ var TaskDetail = require('../TaskDetail');
 
 describe('TaskDetail', function () {
   beforeEach(function () {
+    MarathonStore.getServiceFromTaskID = function () {
+      return new Service({});
+    };
+
     this.container = document.createElement('div');
     this.params = {
 
