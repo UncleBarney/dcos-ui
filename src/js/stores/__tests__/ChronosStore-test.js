@@ -46,7 +46,7 @@ describe('ChronosStore', function () {
 
   describe('dispatcher', function () {
 
-    it('emits event after success event is dispatched', function () {
+    it('emits event after jobs success event is dispatched', function () {
       let changeHandler = jasmine.createSpy('changeHandler');
       ChronosStore.addChangeListener(
         EventTypes.CHRONOS_JOBS_CHANGE,
@@ -61,7 +61,7 @@ describe('ChronosStore', function () {
       expect(changeHandler).toHaveBeenCalled();
     });
 
-    it('emits event after error event is dispatched', function () {
+    it('emits event after jobs error event is dispatched', function () {
       let changeHandler = jasmine.createSpy('changeHandler');
       ChronosStore.addChangeListener(
         EventTypes.CHRONOS_JOBS_ERROR,
@@ -72,6 +72,39 @@ describe('ChronosStore', function () {
         type: ActionTypes.REQUEST_CHRONOS_JOBS_ERROR
       });
     });
+
+    it('emits event after create job success event is dispatched',
+      function () {
+        let changeHandler = jasmine.createSpy('changeHandler');
+        ChronosStore.addChangeListener(
+          EventTypes.CHRONOS_JOB_CREATE_SUCCESS,
+          changeHandler
+        );
+
+        AppDispatcher.handleServerAction({
+          type: ActionTypes.REQUEST_CHRONOS_JOB_CREATE_SUCCESS,
+        });
+
+        expect(changeHandler).toHaveBeenCalled();
+      });
+
+    it('emits event after create job error event is dispatched',
+      function () {
+        let changeHandler = jasmine.createSpy('changeHandler');
+        ChronosStore.addChangeListener(
+          EventTypes.CHRONOS_JOB_CREATE_ERROR,
+          changeHandler
+        );
+
+        AppDispatcher.handleServerAction({
+          type: ActionTypes.REQUEST_CHRONOS_JOB_CREATE_ERROR,
+          data: {message:'Json validation error'}
+        });
+
+        expect(changeHandler).toHaveBeenCalled();
+        expect(changeHandler)
+          .toHaveBeenCalledWith({message:'Json validation error'});
+      });
 
   });
 
