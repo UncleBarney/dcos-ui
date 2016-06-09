@@ -16,7 +16,8 @@ let jobsRoutes = {
         {
           type: Route,
           name: 'jobs-detail',
-          path: ':id/?'
+          path: ':id/?',
+          hideHeaderNavigation: true
         }
       ]
     }

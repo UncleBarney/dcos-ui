@@ -42,17 +42,20 @@ let nodesRoutes = {
       name: 'node-detail',
       path: ':nodeID/?',
       handler: NodeDetailPage,
+      hideHeaderNavigation: true,
       children: [
         {
           type: Route,
           name: 'nodes-task-details',
           path: 'task-detail/:taskID/?',
-          handler: TaskDetail
+          handler: TaskDetail,
+          hideHeaderNavigation: true
         },
         {
           type: Route,
           name: 'node-detail-health',
-          path: ':unitNodeID/:unitID/?'
+          path: ':unitNodeID/:unitID/?',
+          hideHeaderNavigation: true
         },
       ]
     }

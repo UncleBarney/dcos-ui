@@ -50,6 +50,10 @@ const RouterUtil = {
         route.buildBreadCrumb = originalConfiguration.buildBreadCrumb;
       }
 
+      if (originalConfiguration.hideHeaderNavigation) {
+        route.hideHeaderNavigation = originalConfiguration.hideHeaderNavigation;
+      }
+
       return route;
     });
   },
@@ -66,6 +70,17 @@ const RouterUtil = {
     let routes = createRoutesFromReactChildren(elementRoutes[0]);
 
     return RouterUtil.setRouteConfiguration(routes, originalRoutes);
+  },
+
+  /**
+   * Checks if a page should hide the header navigation tabs
+   * @param  {Object} router instance of react-router
+   * @return {Bool} should hide Page Navigation
+   */
+  shouldHideNavigation(router) {
+    let routes = router.getCurrentRoutes();
+
+    return !!routes[routes.length - 1].hideHeaderNavigation;
   }
 
 };

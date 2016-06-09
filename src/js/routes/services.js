@@ -26,12 +26,14 @@ let serviceRoutes = {
           type: Route,
           name: 'services-detail',
           path: ':id/?',
+          hideHeaderNavigation: true,
           children: [
             {
               type: Route,
               name: 'services-task-details',
               path: 'task-detail/:taskID/?',
-              handler: TaskDetail
+              handler: TaskDetail,
+              hideHeaderNavigation: true,
             }
           ]
         },
@@ -39,12 +41,14 @@ let serviceRoutes = {
           type: Route,
           name: 'service-ui',
           path: 'ui/:serviceName/?',
-          handler: ServiceOverlay
+          handler: ServiceOverlay,
+          hideHeaderNavigation: true
         },
         {
           type: Route,
           name: 'services-panel',
-          path: 'service-detail/:serviceName/?'
+          path: 'service-detail/:serviceName/?',
+          hideHeaderNavigation: true
         }
       ]
     }
