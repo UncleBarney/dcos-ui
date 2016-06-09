@@ -16,7 +16,7 @@ var Service = require('../../structs/Service');
 var ServiceDetail = require('../ServiceDetail');
 var ServiceDetailConfigurationTab = require('../ServiceDetailConfigurationTab');
 var ServiceDetailTaskTab = require('../ServiceDetailTaskTab');
-var ServiceDetailVolumeTab = require('../ServiceDetailVolumesTab');
+var ServiceVolumeTable = require('../ServiceVolumeTable');
 
 describe('ServiceDetail', function () {
 
@@ -87,24 +87,6 @@ describe('ServiceDetail', function () {
       );
 
       expect(debugTabView.textContent).toEqual('Debug Placeholder');
-    });
-
-  });
-
-  describe('#renderVolumeTabView', function () {
-
-    it('renders volume tab', function () {
-      var volumeTabView = ReactDOM.render(
-        this.instance.renderVolumesTabView(),
-        this.container
-      );
-      var serviceDetailVolumeTab = TestUtils.findRenderedComponentWithType(
-        volumeTabView,
-        ServiceDetailVolumeTab
-      );
-
-      expect(serviceDetailVolumeTab).toBeDefined();
-
     });
 
   });

@@ -6,7 +6,6 @@ import Service from '../structs/Service';
 import ServiceActionItem from '../constants/ServiceActionItem';
 import ServiceDetailConfigurationTab from './ServiceDetailConfigurationTab';
 import ServiceDetailTaskTab from './ServiceDetailTaskTab';
-import ServiceDetailVolumesTab from './ServiceDetailVolumesTab';
 import ServiceFormModal from './modals/ServiceFormModal';
 import ServiceInfo from './ServiceInfo';
 import ServiceVolumeTable from './ServiceVolumeTable';
